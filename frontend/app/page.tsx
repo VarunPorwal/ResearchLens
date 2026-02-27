@@ -107,8 +107,8 @@ export default function LandingPage() {
         className="fixed top-0 w-full z-50 border-b border-border/50 bg-background/60 backdrop-blur-xl"
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
+          <div className="flex items-center gap-2 cursor-pointer group" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+            <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center group-hover:shadow-[0_0_15px_rgba(59,130,246,0.5)] transition-all">
               <Sparkles className="h-4 w-4 text-primary-foreground" />
             </div>
             <span className="text-lg font-bold tracking-tight">ResearchLens</span>

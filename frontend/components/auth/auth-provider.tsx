@@ -43,10 +43,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setIsLoading(false);
 
             if (_event === "SIGNED_IN") {
-                // Only redirect if they are logging in from the auth page or landing page
-                // Prevent redirecting if they are already actively working in the dashboard
+                // Only redirect if they are logging in specifically from the /auth page
+                // This prevents forceful redirects to dashboard if they are just refreshing the landing page
                 const currentPath = window.location.pathname;
-                if (currentPath === "/auth" || currentPath === "/") {
+                if (currentPath === "/auth") {
                     router.push("/dashboard");
                 }
             }
