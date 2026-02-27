@@ -22,7 +22,7 @@ class EmbeddingService:
     def _call_gemini_api(cls, texts: List[str]) -> dict:
         """Isolated call to Gemini API for retry logic."""
         return genai.embed_content(
-            model="models/text-embedding-004",
+            model="models/gemini-embedding-001",
             content=texts,
             task_type="RETRIEVAL_DOCUMENT"
         )
