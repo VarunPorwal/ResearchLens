@@ -31,12 +31,25 @@ class EmbeddingService:
     def embed_texts(cls, texts: List[str]) -> List[List[float]]:
         """
         Generates embeddings for a list of texts using Gemini API.
+        Respects the 1000 requests / minute rate limit by batching.
         """
+        import time
         cls.get_model()
         
-        # Call Gemini embedding API with retry logic
-        result = cls._call_gemini_api(texts)
-
+        all_embeddings = []
+        batch_size = 100 # Process 100 chunks at a time
         
-        # It returns a dictionary where 'embedding' is a list of lists of floats
-        return result['embedding']
+        for i in range(0, len(texts), batch_size):
+            batch = texts[i:i + batch_size]
+            
+            # Call Gemini embedding API with retry logic
+            result = cls._call_gemini_api(batch)
+            all_embeddings.extend(result['embedding'])
+            
+            # Sleep briefly to avoid hitting the 1000 requests/minute limit
+            # 100 req * 10 batches = 1000 req.
+            # Adding a moderate sleep ensures we pace the requests.
+            if i + batch_size < len(texts):
+                time.sleep(2)
+        
+        return all_embeddings
