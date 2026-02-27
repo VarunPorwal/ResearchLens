@@ -7,9 +7,9 @@ from typing import List, Dict, Tuple
 
 class VectorStoreService:
     @staticmethod
-    def create_index(dimension: int = 384):
+    def create_index(dimension: int = 768):
         """
-        Creates a new FAISS index. BGE-small uses 384 dimensions.
+        Creates a new FAISS index. Gemini text-embedding-004 uses 768 dimensions.
         """
         # IndexFlatIP for Inner Product (cosine similarity if normalized)
         index = faiss.IndexFlatIP(dimension)

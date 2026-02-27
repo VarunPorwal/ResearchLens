@@ -1,23 +1,30 @@
-from sentence_transformers import SentenceTransformer
-from typing import List
 import os
+import google.generativeai as genai
+from typing import List
+from app.core.config import settings
 
 class EmbeddingService:
-    _model = None
-    
     @classmethod
     def get_model(cls):
-        if cls._model is None:
-            # efficient, small model
-            cls._model = SentenceTransformer('BAAI/bge-small-en-v1.5')
-        return cls._model
+        # We don't need a local model anymore, just ensure Gemini is configured
+        if not settings.GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY is not set in environment or config.")
+        genai.configure(api_key=settings.GEMINI_API_KEY)
 
     @classmethod
     def embed_texts(cls, texts: List[str]) -> List[List[float]]:
         """
-        Generates embeddings for a list of texts.
+        Generates embeddings for a list of texts using Gemini API.
         """
-        model = cls.get_model()
-        # normalize_embeddings=True for cosine similarity
-        embeddings = model.encode(texts, normalize_embeddings=True)
-        return embeddings.tolist()
+        cls.get_model()
+        
+        # Call Gemini embedding API
+        # task_type="RETRIEVAL_DOCUMENT" is recommended for storing docs in a vector DB
+        result = genai.embed_content(
+            model="models/text-embedding-004",
+            content=texts,
+            task_type="RETRIEVAL_DOCUMENT"
+        )
+        
+        # It returns a dictionary where 'embedding' is a list of lists of floats
+        return result['embedding']
