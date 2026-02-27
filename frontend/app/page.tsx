@@ -151,6 +151,47 @@ export default function LandingPage() {
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t border-border/50 bg-background/95 backdrop-blur-xl px-6 py-4 flex flex-col gap-4"
+          >
+            <Link href="#features" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground hover:text-primary transition-colors">Features</Link>
+            <Link href="#how-it-works" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground hover:text-primary transition-colors">How It Works</Link>
+            <Link href="#demo" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground hover:text-primary transition-colors">Demo</Link>
+
+            <div className="h-px w-full bg-border/50 my-2" />
+
+            {user ? (
+              <div className="flex flex-col gap-3">
+                <span className="text-sm font-medium text-muted-foreground flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  {user.user_metadata?.full_name || user.email?.split('@')[0]}
+                </span>
+                <Link href="/dashboard" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                    Launch Now
+                  </Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <Link href="/auth" onClick={() => setMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full justify-center">Log in</Button>
+                </Link>
+                <Link href="/auth" onClick={() => setMobileMenuOpen(false)}>
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground justify-center">
+                    Launch Now
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </motion.div>
+        )}
       </motion.nav>
 
       {/* 2. HERO SECTION */}
@@ -437,7 +478,7 @@ export default function LandingPage() {
           </div>
 
           <div className="text-xs text-muted-foreground">
-            Built with AI. Designed for researchers.
+            Designed for researchers.
           </div>
         </div>
       </footer>
