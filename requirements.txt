@@ -7,7 +7,6 @@ requests
 pytest
 httpx
 pypdf
-sentence-transformers
 faiss-cpu
 google-generativeai
 supabase

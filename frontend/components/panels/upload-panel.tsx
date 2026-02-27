@@ -154,7 +154,7 @@ export default function UploadPanel() {
                                         </div>
                                         <div className="truncate">
                                             <p className="text-sm font-semibold truncate text-foreground leading-tight" title={p.filename}>{p.filename}</p>
-                                            <p className="text-xs text-muted-foreground mt-0.5">{p.chunks_count} chunks indexed • Complete</p>
+                                            
                                         </div>
                                     </div>
 
