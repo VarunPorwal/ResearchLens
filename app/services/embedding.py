@@ -14,7 +14,7 @@ class EmbeddingService:
 
     @classmethod
     @retry(
-        wait=wait_exponential(multiplier=1, min=40, max=60),
+        wait=wait_exponential(multiplier=2, min=10, max=60),
         stop=stop_after_attempt(5),
         retry=retry_if_exception_type(Exception), # Catch API errors like 429
         reraise=True
@@ -37,7 +37,7 @@ class EmbeddingService:
         cls.get_model()
         
         all_embeddings = []
-        batch_size = 100 # Process 100 chunks at a time
+        batch_size = 5 # Google's free tier for Gemini can be extremely strict. 
         
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
@@ -46,10 +46,8 @@ class EmbeddingService:
             result = cls._call_gemini_api(batch)
             all_embeddings.extend(result['embedding'])
             
-            # Sleep briefly to avoid hitting the 1000 requests/minute limit
-            # 100 req * 10 batches = 1000 req.
-            # Adding a moderate sleep ensures we pace the requests.
+            # Sleep aggressively to avoid hitting the Quota Exhaustion
             if i + batch_size < len(texts):
-                time.sleep(2)
+                time.sleep(3)
         
         return all_embeddings
