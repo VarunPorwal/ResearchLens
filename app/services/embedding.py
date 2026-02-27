@@ -21,7 +21,7 @@ class EmbeddingService:
         # Call Gemini embedding API
         # task_type="RETRIEVAL_DOCUMENT" is recommended for storing docs in a vector DB
         result = genai.embed_content(
-            model="models/embedding-001",
+            model="models/gemini-embedding-001",
             content=texts,
             task_type="RETRIEVAL_DOCUMENT"
         )
