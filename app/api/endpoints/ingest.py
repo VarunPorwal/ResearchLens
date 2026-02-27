@@ -85,6 +85,12 @@ async def ingest_pdf(file: UploadFile = File(...), user=Depends(get_current_user
         
     except Exception as e:
         print(f"Ingestion error: {str(e)}")
+        # Rollback: Delete from Supabase DB to prevent it from showing up in the UI
+        try:
+            supabase.table("papers").delete().eq("id", file_id).execute()
+        except:
+            pass # Ignore rollback errors
+            
         raise HTTPException(status_code=500, detail=str(e))
     finally:
         if os.path.exists(temp_path):

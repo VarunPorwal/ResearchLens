@@ -37,7 +37,7 @@ class EmbeddingService:
         cls.get_model()
         
         all_embeddings = []
-        batch_size = 5 # Google's free tier for Gemini can be extremely strict. 
+        batch_size = 100 # Process 100 chunks at a time
         
         for i in range(0, len(texts), batch_size):
             batch = texts[i:i + batch_size]
@@ -46,8 +46,8 @@ class EmbeddingService:
             result = cls._call_gemini_api(batch)
             all_embeddings.extend(result['embedding'])
             
-            # Sleep aggressively to avoid hitting the Quota Exhaustion
+            # Sleep briefly to avoid hitting the Quota Exhaustion
             if i + batch_size < len(texts):
-                time.sleep(3)
+                time.sleep(2)
         
         return all_embeddings
