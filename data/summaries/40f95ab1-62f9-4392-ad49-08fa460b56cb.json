@@ -1,0 +1,25 @@
+{
+  "title": "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter",
+  "objective": "To propose a method for pre-training a smaller, general-purpose language representation model, called DistilBERT, which can be fine-tuned with good performance on various tasks, addressing the challenge of operating large pre-trained models under constrained computational budgets in NLP.",
+  "methodology": {
+    "approach": "Leveraged knowledge distillation during the pre-training phase to create a smaller version of a BERT model, contrasting with prior work that primarily used distillation for task-specific models.",
+    "tools": [
+      "BERT",
+      "DistilBERT"
+    ]
+  },
+  "key_findings": [
+    {
+      "finding": "Significant reduction in model size.",
+      "evidence": "reduce the size of a BERT model by 40%"
+    },
+    {
+      "finding": "High retention of original model's capabilities.",
+      "evidence": "retaining 97% of its lang"
+    }
+  ],
+  "conclusion": "The work successfully introduces DistilBERT, demonstrating that applying knowledge distillation during the pre-training phase can drastically reduce the size of a BERT model while largely preserving its performance across various language tasks, making large models more viable for constrained environments.",
+  "limitations": [
+    "Not explicitly mentioned in the provided text."
+  ]
+}
