@@ -61,6 +61,10 @@ Question: {query}
 Answer:"""
 
         try:
+            from app.services.rate_limiter import api_rate_limiter
+            estimated_tokens = len(prompt) // 4
+            api_rate_limiter.wait_if_needed(estimated_tokens)
+            
             model = genai.GenerativeModel('gemini-2.5-flash')
             response = model.generate_content(prompt)
             return response.text
@@ -135,6 +139,10 @@ JSON Output:"""
 
         import re
         try:
+            from app.services.rate_limiter import api_rate_limiter
+            estimated_tokens = len(prompt) // 4
+            api_rate_limiter.wait_if_needed(estimated_tokens)
+            
             model = genai.GenerativeModel('gemini-2.5-flash')
             response = model.generate_content(prompt)
             print("--- RAW GEMINI SUMMARY RESPONSE ---")
@@ -221,6 +229,10 @@ Output a highly structured, valid JSON object exactly matching this format. Do N
 Comparison Analysis JSON:"""
 
         try:
+            from app.services.rate_limiter import api_rate_limiter
+            estimated_tokens = len(prompt) // 4
+            api_rate_limiter.wait_if_needed(estimated_tokens)
+            
             model = genai.GenerativeModel('gemini-2.5-flash')
             response = model.generate_content(prompt)
             print("--- RAW GEMINI COMPARE RESPONSE ---")
@@ -293,6 +305,10 @@ Text to analyze:
 JSON Output:"""
 
         try:
+            from app.services.rate_limiter import api_rate_limiter
+            estimated_tokens = len(prompt) // 4
+            api_rate_limiter.wait_if_needed(estimated_tokens)
+            
             model = genai.GenerativeModel('gemini-2.5-flash')
             response = model.generate_content(prompt)
             print("--- RAW GEMINI ANALYTICS RESPONSE ---")

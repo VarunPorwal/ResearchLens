@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     
     # Secrets
     GEMINI_API_KEY: str = ""
+    HUGGINGFACE_API_KEY: str = ""
     SUPABASE_URL: str = ""
     SUPABASE_ANON_KEY: str = ""
     SUPABASE_SERVICE_ROLE_KEY: str = ""

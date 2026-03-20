@@ -15,7 +15,7 @@ def test_retrieve(mock_search, mock_meta, mock_index, mock_embed):
         "1": {"text": "Chunk 2"}
     }
     
-    results = RAGService.retrieve("query", "file_id")
+    results = RAGService.retrieve("query", "file_id", "user_id")
     
     assert len(results) == 2
     assert results[0] == "Chunk 1"

@@ -1,0 +1,20 @@
+{
+  "title": "Test Paper",
+  "objective": "To test",
+  "methodology": {
+    "approach": "Unit testing",
+    "tools": [
+      "pytest"
+    ]
+  },
+  "key_findings": [
+    {
+      "finding": "It works",
+      "evidence": "Green stick"
+    }
+  ],
+  "conclusion": "Good",
+  "limitations": [
+    "None"
+  ]
+}

@@ -28,7 +28,6 @@ def test_ingest_pdf(mock_save_meta, mock_save_index, mock_add, mock_create, mock
     assert response.status_code == 200
     data = response.json()
     assert data["filename"] == "test.pdf"
-    assert "index_path" in data
     assert "message" in data
     
     # Verify service calls

@@ -7,5 +7,5 @@ def test_embed_texts():
     embeddings = EmbeddingService.embed_texts(texts)
     
     assert len(embeddings) == 2
-    assert len(embeddings[0]) == 384 # BGE-small dimension
+    assert len(embeddings[0]) == 384 # all-MiniLM-L6-v2 dimension
     assert isinstance(embeddings[0][0], float)
