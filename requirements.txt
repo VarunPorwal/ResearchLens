@@ -11,5 +11,5 @@ faiss-cpu
 google-generativeai
 supabase
 pydantic-settings
-tenacity       
-   
+tenacity
+huggingface_hub
